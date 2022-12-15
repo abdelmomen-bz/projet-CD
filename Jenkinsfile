@@ -4,20 +4,19 @@ pipeline
    
     stages {
         
-     stage('Pull') {
-         
-     steps{
-       script{
-     checkout([$class: 'GitSCM', branches: [[name: '*/main']],
-         userRemoteConfigs: [[
-         
-         url:'https://github.com/abdelmomen-bz/projet.CD.git']]])
-         
-         }
-         
-         }
-         
-         }
+           stage(' GIT ') {
+            steps {
+                echo 'Pulliing ...';
+                git branch: 'master', url: 'https://github.com/alaeddineboukhriss/angularproject.git'          
+            }
+     
+        }
+        stage(' install node modules ') {
+            steps {
+            sh ' npm install' 
+            
+            }
+        }
          
          stage('build')
          {
